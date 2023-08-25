@@ -1,2 +1,2 @@
-# sim_runner
+# sim-runner
 GUI for configuring and running LeoSim
