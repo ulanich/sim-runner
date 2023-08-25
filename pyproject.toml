@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "sim-runner"
+version = "0.0.1"
+description = "LeoSim runner"
+authors = ["p.ulanov"]
+readme = "README.md"
+packages = [{include = "sim_runner"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
