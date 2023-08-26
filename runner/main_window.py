@@ -37,6 +37,12 @@ class LeoSimRunner(Ui_MainWindow):
             self.l_duration_2.setText('100000')
         except FileNotFoundError:
             QMessageBox.about(self, 'Ошибка', 'Некорректный репозиторий stw-sim-scripts')
+            self.run_button.setEnabled(False)
+            self.ch_ignore_blind.setEnabled(False)
+            self.ch_perfect_device.setEnabled(False)
+            self.l_duration_2.setEnabled(False)
+            self.comboBox.clear()
+            self.comboBox_2.clear()
 
     def run_simulation(self):
         pass
