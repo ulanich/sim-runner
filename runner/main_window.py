@@ -17,6 +17,7 @@ class LeoSimRunner(Ui_MainWindow):
 
     def configure_buttons(self):
         self.b_open.clicked.connect(self.open_file)
+        self.run_button.clicked.connect(self.run_simulation)
 
     def open_file(self):
         dir_name = QFileDialog.getExistingDirectory(self, 'Open file')
@@ -25,17 +26,17 @@ class LeoSimRunner(Ui_MainWindow):
             for init_cond in os.listdir(dir_name / CONFIG_INIT_CONDITIONS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
                     self.comboBox.addItem(init_cond[:-3])
+            for init_cond in os.listdir(dir_name / CONFIG_MODELS):
+                if init_cond != '__init__.py' and init_cond.endswith('.py'):
+                    self.comboBox_2.addItem(init_cond[:-3])
+
+            self.run_button.setEnabled(True)
+            self.ch_ignore_blind.setEnabled(True)
+            self.ch_perfect_device.setEnabled(True)
+            self.l_duration_2.setEnabled(True)
+            self.l_duration_2.setText('100000')
         except FileNotFoundError:
             QMessageBox.about(self, 'Ошибка', 'Некорректный репозиторий stw-sim-scripts')
 
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "LeoSimRunner"))
-        self.ch_ignore_blind.setText(_translate("MainWindow", "CheckBox"))
-        self.l_ignore_blind.setText(_translate("MainWindow", "Ignore blind"))
-        self.l_perfect_device.setText(_translate("MainWindow", "Perfect devices"))
-        self.run_button.setText(_translate("MainWindow", "RUN"))
-        self.ch_perfect_device.setText(_translate("MainWindow", "CheckBox"))
-        self.l_init_cond.setText(_translate("MainWindow", "Initial conditions"))
-        self.l_duration.setText(_translate("MainWindow", "Durations"))
-        self.b_open.setText(_translate("MainWindow", "Open"))
+    def run_simulation(self):
+        pass
