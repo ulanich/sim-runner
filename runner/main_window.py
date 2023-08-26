@@ -1,4 +1,3 @@
-from PyQt5 import QtCore
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMessageBox
 
@@ -14,19 +13,20 @@ class LeoSimRunner(Ui_MainWindow):
 
     def __init__(self):
         super().__init__()
+        self.leosim_path = Path()
 
     def configure_buttons(self):
         self.b_open.clicked.connect(self.open_file)
         self.run_button.clicked.connect(self.run_simulation)
 
     def open_file(self):
-        dir_name = QFileDialog.getExistingDirectory(self, 'Open file')
-        self.l_open.setText(dir_name)
+        self.leosim_path = QFileDialog.getExistingDirectory(self, 'Open file')
+        self.l_open.setText(self.leosim_path)
         try:
-            for init_cond in os.listdir(dir_name / CONFIG_INIT_CONDITIONS):
+            for init_cond in os.listdir(self.leosim_path / CONFIG_INIT_CONDITIONS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
                     self.comboBox.addItem(init_cond[:-3])
-            for init_cond in os.listdir(dir_name / CONFIG_MODELS):
+            for init_cond in os.listdir(self.leosim_path / CONFIG_MODELS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
                     self.comboBox_2.addItem(init_cond[:-3])
 
@@ -45,4 +45,6 @@ class LeoSimRunner(Ui_MainWindow):
             self.comboBox_2.clear()
 
     def run_simulation(self):
-        pass
+        from threading import Thread
+        tr1 = Thread(target=lambda: os.system(f'{os.getcwd()}/run-sim.cmd {self.leosim_path}'))
+        tr1.start()
