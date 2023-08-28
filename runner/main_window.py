@@ -46,5 +46,5 @@ class LeoSimRunner(Ui_MainWindow):
 
     def run_simulation(self):
         from threading import Thread
-        tr1 = Thread(target=lambda: os.system(f'{os.getcwd()}/run-sim.cmd {self.leosim_path}'))
+        tr1 = Thread(target=lambda: os.system(f'start {os.getcwd()}/run-sim.cmd {self.leosim_path}'))
         tr1.start()
