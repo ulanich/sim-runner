@@ -45,6 +45,11 @@ class LeoSimRunner(Ui_MainWindow):
             self.comboBox_2.clear()
 
     def run_simulation(self):
-        from threading import Thread
-        tr1 = Thread(target=lambda: os.system(f'start {os.getcwd()}/run-sim.cmd {self.leosim_path}'))
-        tr1.start()
+        duration = self.l_duration_2.text()
+        initial_conditions = self.comboBox.currentText()
+        models = self.comboBox_2.currentText()
+        ignore_blind = '--ignore-blind' if self.ch_ignore_blind.isChecked() else ''
+        perfect_devices = self.ch_perfect_device.isChecked()
+        os.system(f'start {os.getcwd()}/run-sim.cmd '
+                  f'{self.leosim_path} {models} {initial_conditions} '
+                  f'{duration} {ignore_blind}')
