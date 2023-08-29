@@ -50,6 +50,8 @@ class LeoSimRunner(Ui_MainWindow):
         models = self.comboBox_2.currentText()
         ignore_blind = '--ignore-blind' if self.ch_ignore_blind.isChecked() else ''
         perfect_devices = self.ch_perfect_device.isChecked()
-        os.system(f'start {os.getcwd()}/run-sim.cmd '
+
+        full_path = os.path.realpath(__file__)
+        os.system(f'start {os.path.dirname(full_path)}/run-sim.cmd '
                   f'{self.leosim_path} {models} {initial_conditions} '
                   f'{duration} {ignore_blind}')
