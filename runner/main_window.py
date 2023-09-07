@@ -25,10 +25,10 @@ class LeoSimRunner(Ui_MainWindow):
         try:
             for init_cond in os.listdir(self.leosim_path / CONFIG_INIT_CONDITIONS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
-                    self.comboBox.addItem(init_cond[:-3])
+                    self.cb_init_cond.addItem(init_cond[:-3])
             for init_cond in os.listdir(self.leosim_path / CONFIG_MODELS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
-                    self.comboBox_2.addItem(init_cond[:-3])
+                    self.cb_models.addItem(init_cond[:-3])
 
             self.run_button.setEnabled(True)
             self.ch_ignore_blind.setEnabled(True)
@@ -41,13 +41,13 @@ class LeoSimRunner(Ui_MainWindow):
             self.ch_ignore_blind.setEnabled(False)
             self.ch_perfect_device.setEnabled(False)
             self.l_duration_2.setEnabled(False)
-            self.comboBox.clear()
-            self.comboBox_2.clear()
+            self.cb_init_cond.clear()
+            self.cb_models.clear()
 
     def run_simulation(self):
         duration = self.l_duration_2.text()
-        initial_conditions = self.comboBox.currentText()
-        models = self.comboBox_2.currentText()
+        initial_conditions = self.cb_init_cond.currentText()
+        models = self.cb_models.currentText()
         ignore_blind = '--ignore-blind' if self.ch_ignore_blind.isChecked() else ''
         perfect_devices = self.ch_perfect_device.isChecked()
 
