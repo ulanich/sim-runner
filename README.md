@@ -1,2 +1,2 @@
-# sim-runner
-GUI for configuring and running LeoSim
+# Удобный ланчер симулятора stw-sim
+
