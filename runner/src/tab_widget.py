@@ -4,10 +4,12 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from runner.src.yaml_tree import YamlTree
 from runner.ui import Ui_MainWindow
 
 CONFIG_MODELS = Path('config/models')
 CONFIG_INIT_CONDITIONS = Path('config/init_conditions')
+CONFIG_SIM_CONFIG = Path('config/sim_config.yml')
 CHECK_ORBIT_VIEWER_DIR = 'yarn.lock'
 
 
@@ -21,9 +23,11 @@ class Leosim(TabBase):
     leosim_path = Path()
 
     def __post_init__(self):
+        self._yaml_tree = YamlTree(self.ui)
         self._configure_buttons()
 
     def _configure_buttons(self):
+        self._tree_yaml = YamlTree(self.ui)
         self.ui.b_open_sim.clicked.connect(self._open_sim_scripts)
         self.ui.b_start_sim.clicked.connect(self._run_simulation)
 
@@ -42,6 +46,7 @@ class Leosim(TabBase):
             for init_cond in os.listdir(self.leosim_path / CONFIG_MODELS):
                 if init_cond != '__init__.py' and init_cond.endswith('.py'):
                     self.ui.cb_models.addItem(init_cond[:-3])
+            self._yaml_tree.display_yaml(self.leosim_path / CONFIG_SIM_CONFIG)
             self._enable_all_sim()
         except FileNotFoundError:
             QMessageBox.about(

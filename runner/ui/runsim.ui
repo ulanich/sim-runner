@@ -142,7 +142,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="Line" name="line_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -156,17 +156,8 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QTreeWidget" name="yaml_tree">
-            <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
-            </property>
-            <column>
-             <property name="text">
-              <string notr="true">1</string>
-             </property>
-            </column>
-           </widget>
+          <item row="3" column="0">
+           <widget class="QTreeView" name="tree_yaml"/>
           </item>
          </layout>
         </item>
