@@ -1,17 +1,12 @@
-import os
 import sys
 import traceback
 from pathlib import Path
 
-from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from tomli import load
 
 from runner.src.tab_widget import Leosim, OrbitViewer
 from runner.ui.ui_gen import Ui_MainWindow
-
-CONFIG_MODELS = Path('config/models')
-CONFIG_INIT_CONDITIONS = Path('config/init_conditions')
-CHECK_ORBIT_VIEWER_DIR = 'yarn.lock'
 
 
 def excepthook(exc_type, exc_value, exc_tb):
@@ -31,10 +26,8 @@ class SimRunner(MainWindowBaseGUI):
 
     def __init__(self):
         super().__init__()
-        self.leosim_path = Path()
-        self.orbit_viewer_path = Path()
-        self.tab_sim = Leosim(self.ui)
-        self.tab_orbit_viewer = OrbitViewer(self.ui)
+        self._tab_sim = Leosim(self.ui)
+        self._tab_orbit_viewer = OrbitViewer(self.ui)
         self._set_version()
 
     @classmethod
